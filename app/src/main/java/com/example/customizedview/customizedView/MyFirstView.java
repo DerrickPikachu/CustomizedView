@@ -2,9 +2,13 @@ package com.example.customizedview.customizedView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -15,6 +19,7 @@ public class MyFirstView extends View {
     private boolean mShowText;
     private int textPos;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public MyFirstView(Context context) {
         super(context);
@@ -45,10 +50,12 @@ public class MyFirstView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // This method is used to measure the width and height of the view
+        // widthMeasureSpec and heightMeasureSpec are the size given by parent view,
+        // which is the size that parent doesn't want to be exceeded
         int minw = getPaddingLeft() + getPaddingRight() + 500;
-        int w = resolveSizeAndState(5000, widthMeasureSpec, 0);
+        int w = resolveSizeAndState(500, widthMeasureSpec, 0);
         int minh = getPaddingBottom() + getPaddingTop() + 700;
-        int h = resolveSizeAndState(5000, heightMeasureSpec, 0);
+        int h = resolveSizeAndState(500, heightMeasureSpec, 0);
         setMeasuredDimension(w, h);
         /**
          *  resolveSizeAndState():
@@ -64,11 +71,41 @@ public class MyFirstView extends View {
         // Never init the Paint object here, it will make app work slow.
         super.onDraw(canvas);
 
-        float left =  getLeft();
-        float right = getRight();
-        float top = getTop();
-        float bottom = getBottom();
-        canvas.drawRect(left, top, right, bottom, paint);
+        // Draw a Rectangle
+//        float left =  getLeft();
+//        float right = getRight();
+//        float top = getTop();
+//        float bottom = getBottom();
+//        canvas.drawRect(left, top, right, bottom, paint);
+
+        // Draw a Circle
+//        float width = getWidth();
+//        float height = getHeight();
+//        float radius = Math.min(width, height) / 2;
+//        canvas.drawCircle(width / 2, height / 2, radius, paint);
+
+        // Draw a Arc
+//        float limit = Math.min(getWidth(), getHeight());
+//        RectF rectf = new RectF(0f, 0f, limit, limit);
+//        canvas.drawArc(rectf, 0, 60, true, paint);
+//        canvas.drawArc(rectf, 60, 103, true, paint2);
+
+        // Draw a picture(bmp)
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+//        float width = (getWidth() - bitmap.getWidth()) / 2;
+//        float height = (getHeight() - bitmap.getHeight()) / 2;
+//        canvas.drawBitmap(bitmap, width, height, paint);
+
+        // Draw a text
+//        canvas.drawText("HelloWorld", 0f, 100f, paint);
+
+        // Draw a path
+        Path p = new Path();
+        p.moveTo(100, 100);
+        p.lineTo(200, 50);
+        p.lineTo(300, 100);
+        p.lineTo(200, 400);
+        canvas.drawPath(p, paint);
     }
 
     public boolean isShowTest() {
@@ -85,5 +122,7 @@ public class MyFirstView extends View {
 
     private void initPaint() {
         paint.setColor(Color.parseColor("#FF4081"));
+        paint.setTextSize(90f);
+        paint2.setColor(Color.parseColor("#FF3347"));
     }
 }

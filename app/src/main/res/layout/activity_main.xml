@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <com.example.customizedview.customizedView.MyFirstView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="272dp"
+        android:layout_height="408dp"
         app:labelPosition="left"
         app:showText="true" />
 
